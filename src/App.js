@@ -48,15 +48,21 @@ class ControlField extends React.Component {
             if(!this.state.tracker[index]){
               return value
             }
-            // return !this.state.tracker[index]
         }, this),
-        tracker = Array(available.length).fill(false);
-    // console.log('available is :', available, 'len gth is ', available.length)
+        tracker = Array(available.length).fill(false),
+        cachedIndex = this.cardIndex;
+
+
     if(!available.length){
       alert('YOU ALL DONE!')
       return
     }
     this.cardIndex = Math.floor(Math.random() * Math.floor(available.length))
+
+    if(cachedIndex === this.cardIndex){
+      console.log('in here')
+      this.nextCard();
+    }
   // console.log(this.cardIndex)
     this.setState({
       cards: available,
@@ -87,7 +93,7 @@ class ControlField extends React.Component {
   render() {
       return (
         <div>
-          <p>YO HOMES</p>
+          <p>Learn some React Facts, Jack</p>
           <div className='inline-block'>
               {this.renderCard(this.cardIndex)}
               <NextButton

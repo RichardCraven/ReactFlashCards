@@ -29,6 +29,7 @@
   width: 100vw;
   border: 5px solid black;
   padding:10px;
+  background-color: teal;
 }
 .flash-card{
   margin: 0 auto;
@@ -39,6 +40,7 @@
   display: table-cell;
   vertical-align:middle;
   text-align:center;
+  background: white;
 }
 .next-button{
   margin-top: 5px;
