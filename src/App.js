@@ -13,6 +13,10 @@ class App extends Component {
         <div className="control-field">
           <ControlField/>
         </div>
+        <footer className="App-footer">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Enjoy</h1>
+        </footer>
       </div>
     );
   }
@@ -33,59 +37,95 @@ class ControlField extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        cards: [
-          ['describe state vs props','gotta have my props'],
-          ['describe immutability','you the mutability'],
-          ['what is a pure component','its a component thats pure'],
-          ['describe MVC','where my opium pipe?']
-        ],
+        cards: {
+          React :  [
+           ['describe state vs props','props are read-only by their owning component, any component can change its own state or even a different components state if it wants to'],
+           ['what is a pure component',"a component that only rerenders on a change to state or props"],
+           ['what does super() do?','it calls the parents constructor function, can pass arguments'],
+          ],
+          Angular : [
+            ['what is a controller for?', 'for putting data on the scope (not processing lengthy business logic). Ideally the controller should just perform translation, coordinate work to the service and spit back the answer to the UI'],
+            ['what is a service?', 'holds a reference to any object'],
+            ['what is a factory?', 'is a function which returns an object'],
+            ['what is a provider?', 'a function which returns a fuction'],
+          ],
+          General : [
+            ['(Architecture) what is "business logic"?', 'put your business logic in your domain model'],
+            ['(Architecture) where do you put your "application logic"?', 'in the application layer'],
+            ['(Architecture) what is the "application layer"?', 'translates back and forth between the UI, and the domain layer, effectively hiding the domain from the rest of the system'],
+            ['(Architecture) what is the "domain layer"?','for validation involving business logic (tedious shit)'],
+            ['(Basic) what are immutable values?', 'values that cannot be changed. ex: strings, numbers']
+          ]
+        },
+        topics : ["React","Angular", "General"],
+        current_topic : 0,
+        front_or_back: true
       };
-      this.state.tracker = Array(this.state.cards.length).fill(false)
-      this.cardIndex = Math.floor(Math.random() * Math.floor(this.state.cards.length));
+      this.state.cardIndex = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[this.state.current_topic]].length));
     }
   nextCard(){
-    let available = this.state.cards.filter(function(value, index){
-            if(!this.state.tracker[index]){
-              return value
-            }
-        }, this),
-        tracker = Array(available.length).fill(false),
-        cachedIndex = this.cardIndex;
+       let cards = Object.assign({},this.state.cards),
+        new_set = cards[this.state.topics[this.state.current_topic]], num;
+        if(!this.state.front_or_back){
+          new_set.splice(this.state.cardIndex, 1);
+        };
+        let cachedIndex = this.state.cardIndex;
 
 
-    if(!available.length){
+    if(!this.state.cards[this.state.topics[this.state.current_topic]].length){
       alert('YOU ALL DONE!')
       return
     }
-    this.cardIndex = Math.floor(Math.random() * Math.floor(available.length))
-
-    if(cachedIndex === this.cardIndex){
-      console.log('in here')
-      this.nextCard();
-    }
-  // console.log(this.cardIndex)
+    num = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[this.state.current_topic]].length));
+    while(num === cachedIndex && this.state.cards[this.state.topics[this.state.current_topic]].length > 1){
+      num = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[this.state.current_topic]].length))
+    };
     this.setState({
-      cards: available,
-      tracker: tracker
+      cards : cards,
+      front_or_back : true,
+      cardIndex : num
     });
   }
 
   flipCard(i) {
-      let cards = this.state.cards.slice(),
-            tracker = this.state.tracker.slice();
-      tracker[i] = true;
+      let front_or_back = false;
       this.setState({
-        tracker: tracker,
-        cards: cards
+        front_or_back : front_or_back
       });
-    }
+      if(!this.state.front_or_back){
+        this.nextCard();
+      }
+  }
 
-  renderCard(index) {
-    console.log(this.state.tracker[index] ? this.state.cards[index][1] : this.state.cards[index][0])
+  switchTopics() {
+      let current_topic = this.state.current_topic,
+          index;
+      current_topic++
+      if(current_topic > 2){
+        current_topic = 0;
+      }
+      index = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[current_topic]].length))
+      this.setState({
+        current_topic: current_topic,
+        front_or_back : true,
+        cardIndex : index
+      });
+  }
+
+  renderCard() {
+    let front_or_back = null;
+    if(!this.state.cards[this.state.topics[this.state.current_topic]].length){
+      return  (
+           <FlashCard
+              value = {'NO MORE CARDS FOR THIS TOPIC'}
+           /> 
+      );
+    }
+    this.state.front_or_back ? front_or_back = 0 : front_or_back = 1;
     return  (
          <FlashCard
-            value = {this.state.tracker[index] ? this.state.cards[index][1] : this.state.cards[index][0]}
-            onClick={() => this.flipCard(index)}
+            value = {this.state.cards[this.state.topics[this.state.current_topic]][this.state.cardIndex][front_or_back]}
+            onClick={() => this.flipCard()}
          /> 
     );
   }  
@@ -93,12 +133,15 @@ class ControlField extends React.Component {
   render() {
       return (
         <div>
-          <p>Learn some React Facts, Jack</p>
+          <p className='top-text'>study {this.state.topics[this.state.current_topic]} Facts, ya Jagoff</p>
           <div className='inline-block'>
-              {this.renderCard(this.cardIndex)}
+              <SwitchButton
+               onClick={() => this.switchTopics()}
+              />
               <NextButton
                onClick={() => this.nextCard()}
               />
+              {this.renderCard()}
           </div>
         </div>
         );
@@ -109,6 +152,14 @@ function NextButton(props) {
   return (
     <button className="next-button" onClick={props.onClick}>
       NEW CARD
+    </button>
+  );
+}
+
+function SwitchButton(props) {
+  return (
+    <button className="switch-button" onClick={props.onClick}>
+      SWITCH TOPICS
     </button>
   );
 }

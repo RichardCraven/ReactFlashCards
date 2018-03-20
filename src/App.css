@@ -14,6 +14,13 @@
   color: white;
 }
 
+.App-footer {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: lightGrey;
+}
+
 .App-title {
   font-size: 1.5em;
 }
@@ -23,6 +30,9 @@
 }
 .inline-block{
   display: inline-block;
+}
+.top-text{
+  color: lightBlue;
 }
 .control-field{
   height: 500px;
@@ -43,12 +53,24 @@
   background: white;
 }
 .next-button{
-  margin-top: 5px;
+  margin: 5px 0px 5px 50px;
   padding: 5px;
   border: 1px solid green;
   height: 50px;
   width: 100px;
 }
+
+.switch-button:hover, .next-button:hover{
+  background: lightBlue;
+}
+
+.switch-button{
+  margin: 5px 50px 5px 0px;
+  padding: 5px;
+  border: 1px solid green;
+  height: 50px;
+  width: 100px;
+} 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
