@@ -54,7 +54,17 @@ class ControlField extends React.Component {
             ['(Architecture) where do you put your "application logic"?', 'in the application layer'],
             ['(Architecture) what is the "application layer"?', 'translates back and forth between the UI, and the domain layer, effectively hiding the domain from the rest of the system'],
             ['(Architecture) what is the "domain layer"?','for validation involving business logic (tedious shit)'],
-            ['(Basic) what are immutable values?', 'values that cannot be changed. ex: strings, numbers']
+            ['(Basic) what are immutable values?', 'values that cannot be changed. ex: strings, numbers'],
+            ['(Flexbox) how do you align columns to the left?', 'align-items : left'],
+            ['(Flexbox) how do you move "row" elements to the right?', 'justify-content : right'],
+            ['(General) what is the domain name registrar', 'Icann is the recognized US company that determines who gets to sell domain names. They kinda own the internet'],
+            ['(General) what is a DNS server/DNS solution?', 'The entity one level below the registrar, like GoDaddy or Route 53 that is trusted to manage domain names'],
+            ['(General) what is a pem file', 'an encryption key/certificate for SSH'],
+            ['(General) what is SSH', 'secure shell/ secure communication layer to communicate with another computer over the internet'],
+            ['(General) old school was Apache and PHP', 'NGinX and Node.js NGinX creates a reverse proxy which routes the URL to the right server port'],
+            ['learn to use a shell text editor like VIM or NANO','ok'],
+            ['(General) what does array.map() do', 'creates a new array with the results of calling a provided function on every element in the calling array'],
+            ['(General) what does array.filter() do', 'creates a new array with all elements that pass the test implemented by the provided function'],
           ]
         },
         topics : ["React","Angular", "General"],

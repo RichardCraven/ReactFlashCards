@@ -9,14 +9,14 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 10vh;
   padding: 20px;
   color: white;
 }
 
 .App-footer {
   background-color: #222;
-  height: 150px;
+  height: 10vh;
   padding: 20px;
   color: lightGrey;
 }
@@ -35,7 +35,7 @@
   color: lightBlue;
 }
 .control-field{
-  height: 500px;
+  height: 80vh;
   width: 100vw;
   border: 5px solid black;
   padding:10px;
