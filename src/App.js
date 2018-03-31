@@ -3,19 +3,24 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+        topic : ['React','Angular','General']
+      }
+    }
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to my FLASHCARDS APP</h1>
         </header>
         <div className="control-field">
           <ControlField/>
         </div>
         <footer className="App-footer">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Enjoy</h1>
         </footer>
       </div>
     );
@@ -143,7 +148,8 @@ class ControlField extends React.Component {
   render() {
       return (
         <div>
-          <p className='top-text'>study {this.state.topics[this.state.current_topic]} Facts, ya Jagoff</p>
+          <p className='topic'>TOPIC</p>
+          <p className='top-text'>{this.state.topics[this.state.current_topic]}</p>
           <div className='inline-block'>
               <SwitchButton
                onClick={() => this.switchTopics()}

@@ -31,26 +31,36 @@
 .inline-block{
   display: inline-block;
 }
+.topic{
+  font-size: 1.5em;
+  color: white;
+  text-decoration: underline;
+  margin-bottom: 5px;
+}
 .top-text{
   color: lightBlue;
+  margin-top: 0px;
+  font-size: 1.5em;
 }
 .control-field{
   height: 80vh;
-  width: 100vw;
+  /*width: 100vw;*/
+  margin: 0 auto;
   border: 5px solid black;
-  padding:10px;
+  /*padding:10px;*/
   background-color: teal;
 }
 .flash-card{
   margin: 0 auto;
   margin-bottom:5px;
-  border: 1px solid blue;
+  /*border: 1px solid blue;*/
   height: 400px;
   width: 700px;
   display: table-cell;
   vertical-align:middle;
   text-align:center;
   background: white;
+  /*padding: 0px 45px 0px 45px;*/
 }
 .next-button{
   margin: 5px 0px 5px 50px;
@@ -65,13 +75,39 @@
 }
 
 .switch-button{
-  margin: 5px 50px 5px 0px;
+  margin: 5px 50px 20px 0px;
   padding: 5px;
   border: 1px solid green;
   height: 50px;
   width: 100px;
 } 
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/*@media screen {
+  
+}*/
+
+@media (max-width: 480px) {
+ .control-field{
+  width: 97vw;
+  height: 80vh;
+  margin: 0 auto;
+ }
+ .top-text{
+   color: lightBlue;
+   margin-top: 8%;
+   margin-bottom: 5%;
+ }
+  .App-footer img{
+    display: none;
+  }
+  .App-footer{
+    height: 3vh;
+    padding: 0;
+  }
 }
