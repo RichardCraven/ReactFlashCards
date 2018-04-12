@@ -96,17 +96,21 @@ class ControlField extends React.Component {
       this.cachedCards = JSON.parse(JSON.stringify(this.state.cards));
     }
   nextCard(){
-    let cards = JSON.parse(JSON.stringify(this.state.cards)),
+    // let cards = JSON.parse(JSON.stringify(this.state.cards)),
+    let cards = Object.assign({}, this.state.cards),
     new_set = cards[this.state.topics[this.state.current_topic]], num;
     if(!this.state.front_or_back){new_set.splice(this.state.cardIndex, 1)};
     let cachedIndex = this.state.cardIndex;
 
     if(!this.state.cards[this.state.topics[this.state.current_topic]].length){
       alert('YOU ALL DONE!')
+      // num = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[this.state.current_topic]].length));
+      // while (num === cachedIndex && this.state.cards[this.state.topics[this.state.current_topic]].length > 1) {
+      //   num = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[this.state.current_topic]].length))
+      // };
       this.setState({
         front_or_back: true
       });
-      // cards[this.state.topics[this.state.current_topic]] = this.cachedCards[this.state.topics[this.state.current_topic]]
       return
     }
     num = Math.floor(Math.random() * Math.floor(this.state.cards[this.state.topics[this.state.current_topic]].length));
@@ -147,11 +151,12 @@ class ControlField extends React.Component {
 
   resetCards(){
     let cards = JSON.parse(JSON.stringify(this.state.cards)),
-        newCardSet = JSON.parse(JSON.stringify(this.cachedCards));
-
+        newCardSet = JSON.parse(JSON.stringify(this.cachedCards)), num;
     cards[this.state.topics[this.state.current_topic]] = newCardSet[this.state.topics[this.state.current_topic]];
+    num = Math.floor(Math.random() * cards[this.state.topics[this.state.current_topic]].length);
     this.setState({
-      cards : cards
+      cards : cards,
+      cardIndex : num
     })
   }
 
